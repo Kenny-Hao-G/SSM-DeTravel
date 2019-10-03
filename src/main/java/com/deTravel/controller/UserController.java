@@ -16,6 +16,7 @@ public class UserController {
     @RequestMapping("/login")
     @ResponseBody
     public String login(User user){
+
         return "success";
     }
 
