@@ -29,4 +29,18 @@ public class UserController {
         return count > 0 ? "success" : "fail";
     }
 
+    /**
+     * 用户注册
+     *
+     * @param uName 姓名
+     * @param uNickName 昵称
+     * @param uEmail 邮箱
+     * @param uPassword 密码
+     * @return success
+     */
+    @ResponseBody
+    @RequestMapping("/singIn")
+    public String userRegistered(String uName, String uNickName, String uEmail, String uPassword) {
+        return "success";
+    }
 }
