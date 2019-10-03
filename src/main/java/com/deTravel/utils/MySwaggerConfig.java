@@ -20,7 +20,7 @@ public class MySwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 //.apis(RequestHandlerSelectors.any())
-                .apis(RequestHandlerSelectors.basePackage("com.wwp.controller")) //扫描的包
+                .apis(RequestHandlerSelectors.basePackage("com.deTravel.controller")) //扫描的包
                 .build()
                 .apiInfo(apiInfo());
     }
