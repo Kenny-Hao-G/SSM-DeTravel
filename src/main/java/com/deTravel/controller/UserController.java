@@ -19,13 +19,14 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
     @RequestMapping("/login")
     @ResponseBody
-    public String login(User user){
+    public String login(User user) {
         user.setuPassword(MD5Utils.getMd5(user.getuPassword()));
         int count = userService.selectUser(user);
 
-        return count>0?"success":"fail";
+        return count > 0 ? "success" : "fail";
     }
 
 }
