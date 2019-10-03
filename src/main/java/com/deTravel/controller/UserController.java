@@ -5,6 +5,7 @@ import com.deTravel.service.UserService;
 import com.deTravel.utils.MD5Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,7 @@ public class UserController {
 
     @RequestMapping("/login")
     @ResponseBody
-    @ApiOperation(value = "用户注册操作")
+    @ApiOperation(value = "用户登录操作")
     public String login(User user) {
         user.setuPassword(MD5Utils.getMd5(user.getuPassword()));
         int count = userService.selectUser(user);
@@ -39,7 +40,10 @@ public class UserController {
      * @param user
      * @return
      */
-    public String addUser(User user) {
+    @RequestMapping("singIn")
+    @ResponseBody
+    @ApiOperation(value = "用户注册操作")
+    public String addUser(@ApiParam(value = "用户实体") User user) {
         // 注册时调用该操作,实现注册时密码为 md5 加密密文
         user.setuPassword(MD5Utils.getMd5(user.getuPassword()));
 
