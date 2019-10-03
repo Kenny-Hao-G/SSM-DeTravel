@@ -10,19 +10,19 @@ public class User {
     private String uEmail;
     private String uName;
     private String uNickName;
-    private String uPassword;
+    private String uPassWord;
     private String uPhone;
     private String uPicture;
 
     public User() {
     }
 
-    public User(int uId, String uEmail, String uName, String uNickName, String uPassword, String uPhone, String uPicture) {
+    public User(int uId, String uEmail, String uName, String uNickName, String uPassWord, String uPhone, String uPicture) {
         this.uId = uId;
         this.uEmail = uEmail;
         this.uName = uName;
         this.uNickName = uNickName;
-        this.uPassword = uPassword;
+        this.uPassWord = uPassWord;
         this.uPhone = uPhone;
         this.uPicture = uPicture;
     }
@@ -59,12 +59,12 @@ public class User {
         this.uNickName = uNickName;
     }
 
-    public String getuPassword() {
-        return uPassword;
+    public String getuPassWord() {
+        return uPassWord;
     }
 
-    public void setuPassword(String uPassword) {
-        this.uPassword = uPassword;
+    public void setuPassword(String uPassWord) {
+        this.uPassWord = uPassWord;
     }
 
     public String getuPhone() {
@@ -90,7 +90,7 @@ public class User {
                 ", uEmail='" + uEmail + '\'' +
                 ", uName='" + uName + '\'' +
                 ", uNickName='" + uNickName + '\'' +
-                ", uPassword='" + uPassword + '\'' +
+                ", uPassWord='" + uPassWord + '\'' +
                 ", uPhone='" + uPhone + '\'' +
                 ", uPicture='" + uPicture + '\'' +
                 '}';

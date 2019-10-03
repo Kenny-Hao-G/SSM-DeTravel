@@ -28,7 +28,7 @@ public class UserController {
     @ResponseBody
     @ApiOperation(value = "用户登录操作")
     public String login(User user) {
-        user.setuPassword(MD5Utils.getMd5(user.getuPassword()));
+        user.setuPassword(MD5Utils.getMd5(user.getuPassWord()));
         int count = userService.selectUser(user);
 
         return count > 0 ? "success" : "fail";
@@ -45,7 +45,7 @@ public class UserController {
     @ApiOperation(value = "用户注册操作")
     public String addUser(@ApiParam(value = "用户实体") User user) {
         // 注册时调用该操作,实现注册时密码为 md5 加密密文
-        user.setuPassword(MD5Utils.getMd5(user.getuPassword()));
+        user.setuPassword(MD5Utils.getMd5(user.getuPassWord()));
 
         // 调用 Service 层, 完成对用户的注册操作
         int result = userService.addUserInfo(user);
