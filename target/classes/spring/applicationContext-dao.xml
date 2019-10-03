@@ -21,7 +21,7 @@
         <!--DI  依赖注入  如果依赖注入的是一个实例化对象的话，需要使用ref-->
         <property name="dataSource" ref="dataSource"/>
         <!--给实体起别名-->
-        <property name="typeAliasesPackage" value="com.lfh.pojo"/>
+        <property name="typeAliasesPackage" value="com.deTravel.pojo"/>
 
         <!-- 注意其他配置 -->
         <property name="plugins">

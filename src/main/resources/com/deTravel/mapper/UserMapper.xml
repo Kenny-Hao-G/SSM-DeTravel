@@ -7,4 +7,11 @@
         select count(1) from db_DeTravel.tb_user where uEmail=${uEmail} and uPassWord=#{uPassword}
     </select>
 
+    <insert id="addUserInfo" parameterType="com.deTravel.pojo.User">
+        insert into user (
+            uName, uNickName, uEmail, uPassword
+        ) values (
+            #{uName}, #{uNickName}, #{uEmail}, #{uPassword}
+        )
+    </insert>
 </mapper>

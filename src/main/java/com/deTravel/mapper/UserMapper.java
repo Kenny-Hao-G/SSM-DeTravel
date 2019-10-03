@@ -9,4 +9,12 @@ import com.deTravel.pojo.User;
  */
 public interface UserMapper {
     int selectUser(User user);
+
+    /**
+     * 用户注册
+     *
+     * @param user
+     * @return
+     */
+    int addUserInfo(User user);
 }
