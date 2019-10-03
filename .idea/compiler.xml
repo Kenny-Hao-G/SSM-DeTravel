@@ -14,6 +14,7 @@
       <module name="DeTravel-Controller" target="1.8" />
       <module name="DeTravelDao" target="1.8" />
       <module name="DeTravelPojo" target="1.8" />
+      <module name="SSM-DeTravel" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
