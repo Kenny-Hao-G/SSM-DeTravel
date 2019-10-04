@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -18,17 +19,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/user")
-@Api(value = "用户操作")
+@Api(value = "用户操作", tags = "用户操作")
 public class UserController {
 
     @Autowired
     UserService userService;
 
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation(value = "用户登录操作")
     public String login(User user) {
-        user.setuPassword(MD5Utils.getMd5(user.getuPassWord()));
+        user.setuPassWord(MD5Utils.getMd5(user.getuPassWord()));
         int count = userService.selectUser(user);
 
         return count > 0 ? "success" : "fail";
@@ -40,12 +41,12 @@ public class UserController {
      * @param user
      * @return
      */
-    @RequestMapping("singIn")
+    @RequestMapping(value = "singIn",method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation(value = "用户注册操作")
     public String addUser(@ApiParam(value = "用户实体") User user) {
         // 注册时调用该操作,实现注册时密码为 md5 加密密文
-        user.setuPassword(MD5Utils.getMd5(user.getuPassWord()));
+        user.setuPassWord(MD5Utils.getMd5(user.getuPassWord()));
 
         // 调用 Service 层, 完成对用户的注册操作
         int result = userService.addUserInfo(user);

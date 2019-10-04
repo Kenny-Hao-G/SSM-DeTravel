@@ -63,7 +63,7 @@ public class User {
         return uPassWord;
     }
 
-    public void setuPassword(String uPassWord) {
+    public void setuPassWord(String uPassWord) {
         this.uPassWord = uPassWord;
     }
 
