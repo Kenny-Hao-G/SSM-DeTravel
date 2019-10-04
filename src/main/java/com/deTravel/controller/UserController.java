@@ -73,7 +73,6 @@ public class UserController {
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation(value = "图片上传")
-
     @ApiImplicitParam(value = "img", name = "图片")
     public String uploadHeadImg(MultipartFile img) {
         String originalFilename = img.getOriginalFilename();
@@ -101,7 +100,8 @@ public class UserController {
         if (count > 0) {
             String code = (int) (Math.random() * (9 + 1) * 100000) + "";
 
-            MailUtils.sendMail(user.getuEmail(), "你的重置密码是" + code + "收到后请尽快登录修改密码", "欢迎使用DeTravel————APP,祝你愉快！！");
+            MailUtils.sendMail(user.getuEmail(), "你的重置密码是:  " + code + "  收到后请尽快登录修改密码",
+                    "欢迎使用DeTravel————APP,祝你愉快！！");
 
             user.setuPassWord(MD5Utils.getMd5(code));
             userService.updatePasswardByCode(user);
