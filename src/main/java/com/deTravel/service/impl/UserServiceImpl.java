@@ -26,5 +26,25 @@ public class UserServiceImpl implements UserService {
         return userMapper.addUserInfo(user);
     }
 
+    @Override
+    public int selectUserToReset(User user) {
+        return userMapper.selectUserToReset(user);
+    }
+
+    @Override
+    public void updatePasswardByCode(User user) {
+        userMapper.updatePasswardByCode(user);
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return userMapper.getUserByEmail(email);
+    }
+
+    @Override
+    public int updateUserByForm(User user) {
+        return userMapper.updateUserByForm(user);
+    }
+
 
 }

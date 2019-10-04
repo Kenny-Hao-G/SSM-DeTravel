@@ -4,14 +4,31 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.deTravel.mapper.UserMapper">
     <select id="selectUser" parameterType="user" resultType="int">
-        select count(1) from db_DeTravel.tb_user where uEmail=${uEmail} and uPassWord=#{uPassWord}
+        select count(1) from db_DeTravel.tb_user where uEmail=#{uEmail} and uPassWord=#{uPassWord}
     </select>
 
+    <select id="selectUserToReset" parameterType="user" resultType="integer">
+        select count(1) from db_DeTravel.tb_user where uName=#{uName} and uNickName=#{uNickName} and uEmail=#{uEmail}
+    </select>
+
+    <update id="updatePasswardByCode" parameterType="user" >
+        update db_DeTravel.tb_user set  uPassWord=#{uPassWord} where uEmail=#{uEmail}
+    </update>
+
     <insert id="addUserInfo" parameterType="com.deTravel.pojo.User">
-        insert into db_DeTravel.tb_user (
+        insert into db_DeTravel.tb_user ( uName,
             uNickName, uEmail, uPassWord,uPicture,uPhone
         ) values (
             #{uName}, #{uNickName}, #{uEmail}, #{uPassWord},#{uPicture},#{uPhone}
         )
     </insert>
+
+    <select id="getUserByEmail" parameterType="string" resultType="user">
+      select * from db_DeTravel.tb_user where uEmail =#{uEmail}
+  </select>
+
+    <update id="updateUserByForm" parameterType="user">
+        update db_DeTravel.tb_user set uName= #{uName},uNickName=#{uNickName}, uPassWord=#{uPassWord},uPhone=#{uPhone}where uId = #{uId}
+    </update>
+
 </mapper>
