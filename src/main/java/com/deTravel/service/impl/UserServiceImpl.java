@@ -26,5 +26,15 @@ public class UserServiceImpl implements UserService {
         return userMapper.addUserInfo(user);
     }
 
+    @Override
+    public int selectUserToReset(User user) {
+        return userMapper.selectUserToReset(user);
+    }
+
+    @Override
+    public void updatePasswardByCode(User user) {
+        userMapper.updatePasswardByCode(user);
+    }
+
 
 }

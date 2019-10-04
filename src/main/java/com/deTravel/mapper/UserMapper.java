@@ -17,4 +17,8 @@ public interface UserMapper {
      * @return
      */
     int addUserInfo(User user);
+
+    int selectUserToReset(User user);
+
+    void updatePasswardByCode(User user);
 }

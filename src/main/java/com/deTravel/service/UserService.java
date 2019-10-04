@@ -17,4 +17,10 @@ public interface UserService {
      * @return
      */
     int addUserInfo(User user);
+
+
+    int selectUserToReset(User user);
+
+    void updatePasswardByCode(User user);
+
 }

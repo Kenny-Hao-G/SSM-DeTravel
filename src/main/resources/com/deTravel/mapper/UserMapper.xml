@@ -7,6 +7,14 @@
         select count(1) from db_DeTravel.tb_user where uEmail=#{uEmail} and uPassWord=#{uPassWord}
     </select>
 
+    <select id="selectUserToReset" parameterType="user" resultType="integer">
+        select count(1) from db_DeTravel.tb_user where uName=#{uName} and uNickName=#{uNickName} and uEmail=#{uEmail}
+    </select>
+
+    <update id="updatePasswardByCode" parameterType="user" >
+        update db_DeTravel.tb_user set  uPassWord=#{uPassWord} where uEmail=#{uEmail}
+    </update>
+
     <insert id="addUserInfo" parameterType="com.deTravel.pojo.User">
         insert into db_DeTravel.tb_user ( uName,
             uNickName, uEmail, uPassWord,uPicture,uPhone
@@ -14,4 +22,5 @@
             #{uName}, #{uNickName}, #{uEmail}, #{uPassWord},#{uPicture},#{uPhone}
         )
     </insert>
+
 </mapper>

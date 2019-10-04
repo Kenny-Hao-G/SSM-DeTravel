@@ -14,6 +14,8 @@ public class User {
     private String uPhone;
     private String uPicture;
 
+
+
     public User() {
     }
 
@@ -83,16 +85,7 @@ public class User {
         this.uPicture = uPicture;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "uId=" + uId +
-                ", uEmail='" + uEmail + '\'' +
-                ", uName='" + uName + '\'' +
-                ", uNickName='" + uNickName + '\'' +
-                ", uPassWord='" + uPassWord + '\'' +
-                ", uPhone='" + uPhone + '\'' +
-                ", uPicture='" + uPicture + '\'' +
-                '}';
-    }
+
+
+
 }

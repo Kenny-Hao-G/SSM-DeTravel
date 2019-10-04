@@ -3,14 +3,22 @@ package com.deTravel.controller;
 import com.deTravel.pojo.User;
 import com.deTravel.service.UserService;
 import com.deTravel.utils.MD5Utils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import com.deTravel.utils.MailUtils;
+import com.deTravel.utils.UUIDUtils;
+
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * @author WWP
@@ -24,8 +32,12 @@ public class UserController {
 
     @Autowired
     UserService userService;
+    @Value("${IMG_PATH}")
+    String IMG_PATH;
+    @Value("${IMG_URL}")
+    String IMG_URL;
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation(value = "用户登录操作")
     public String login(User user) {
@@ -41,7 +53,7 @@ public class UserController {
      * @param user
      * @return
      */
-    @RequestMapping(value = "singIn",method = RequestMethod.POST)
+    @RequestMapping(value = "singIn", method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation(value = "用户注册操作")
     public String addUser(@ApiParam(value = "用户实体") User user) {
@@ -57,4 +69,47 @@ public class UserController {
         }
         return "fail";
     }
+
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value = "图片上传")
+
+    @ApiImplicitParam(value = "img", name = "图片")
+    public String uploadHeadImg(MultipartFile img) {
+        String originalFilename = img.getOriginalFilename();
+        String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
+        String newFile = UUIDUtils.getUUID() + suffix;
+        String filePrefix = IMG_PATH;
+        try {
+            img.transferTo(new File(filePrefix, newFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String imgUrl = IMG_URL + newFile;
+        return imgUrl;
+    }
+
+
+    /**
+     * 重设密码
+     */
+    @RequestMapping(value = "/reset", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value = "用户的重设密码")
+    public String reset(User user) {
+        int count = userService.selectUserToReset(user);
+        if (count > 0) {
+            String code = (int) (Math.random() * (9 + 1) * 100000) + "";
+
+            MailUtils.sendMail(user.getuEmail(), "你的重置密码是" + code + "收到后请尽快登录修改密码", "欢迎使用DeTravel————APP,祝你愉快！！");
+
+            user.setuPassWord(MD5Utils.getMd5(code));
+            userService.updatePasswardByCode(user);
+            return "success";
+        }
+        return "fail";
+
+    }
+
+
 }
