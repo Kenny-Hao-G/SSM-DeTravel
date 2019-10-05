@@ -73,25 +73,6 @@ public class UserController {
         return "fail";
     }
 
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    @ResponseBody
-    @ApiOperation(value = "图片上传")
-    @ApiImplicitParam(value = "img", name = "图片")
-    public String uploadHeadImg(MultipartFile img) {
-        String originalFilename = img.getOriginalFilename();
-        String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
-        String newFile = UUIDUtils.getUUID() + suffix;
-        String filePrefix = IMG_PATH;
-        try {
-            img.transferTo(new File(filePrefix, newFile));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String imgUrl = IMG_URL + newFile;
-        return imgUrl;
-    }
-
-
     /**
      * 重设密码
      */
