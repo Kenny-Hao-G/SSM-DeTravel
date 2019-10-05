@@ -152,6 +152,7 @@ public class UserController {
         user.setuPassWord(MD5Utils.getMd5(user.getuPassWord()));
         int result = userService.updateUserByForm(user);
         return "success";
+
     }
 
 }
