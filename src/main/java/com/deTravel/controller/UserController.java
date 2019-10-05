@@ -43,11 +43,15 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation(value = "用户登录操作")
-    public String login(User user) {
+    public String login(User user,HttpSession session) {
         user.setuPassWord(MD5Utils.getMd5(user.getuPassWord()));
         int count = userService.selectUser(user);
+        if(count>0){
+            session.setAttribute("USER",user.getuNickName());
+            return "success";
+        }
 
-        return count > 0 ? "success" : "fail";
+        return  "fail";
     }
 
     /**
