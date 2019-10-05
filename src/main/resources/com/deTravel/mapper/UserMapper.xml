@@ -16,10 +16,10 @@
     </update>
 
     <insert id="addUserInfo" parameterType="com.deTravel.pojo.User">
-        insert into db_DeTravel.tb_user ( uName,
-            uNickName, uEmail, uPassWord,uPicture,uPhone
+        insert into db_DeTravel.tb_user (
+        uName, uNickName, uEmail, uPassWord,
         ) values (
-            #{uName}, #{uNickName}, #{uEmail}, #{uPassWord},#{uPicture},#{uPhone}
+            #{uName}, #{uNickName}, #{uEmail}, #{uPassWord}
         )
     </insert>
 
