@@ -6,7 +6,7 @@ import com.deTravel.utils.MD5Utils;
 import com.deTravel.utils.MailUtils;
 import com.deTravel.utils.UUIDUtils;
 
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,11 +40,14 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation(value = "用户登录操作")
-    public String login(User user) {
+    public String login(User user, HttpSession session) {
         user.setuPassWord(MD5Utils.getMd5(user.getuPassWord()));
         int count = userService.selectUser(user);
-
-        return count > 0 ? "success" : "fail";
+        if (count > 0) {
+            session.setAttribute("USER", user.getuNickName());
+            return "success";
+        }
+        return "fail";
     }
 
     /**
