@@ -124,6 +124,7 @@ public class UserController {
     public String outLogin(HttpSession session) {
         session.removeAttribute("userAccount");
         return "success";
+
     }
 
     /**
