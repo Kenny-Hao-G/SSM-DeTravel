@@ -36,5 +36,15 @@ public class UserServiceImpl implements UserService {
         userMapper.updatePasswardByCode(user);
     }
 
+    @Override
+    public User getUserByEmail(String email) {
+        return userMapper.getUserByEmail(email);
+    }
+
+    @Override
+    public int updateUserByForm(User user) {
+        return userMapper.updateUserByForm(user);
+    }
+
 
 }

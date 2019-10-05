@@ -23,4 +23,7 @@ public interface UserService {
 
     void updatePasswardByCode(User user);
 
+    User getUserByEmail(String email);
+
+    int updateUserByForm(User user);
 }
