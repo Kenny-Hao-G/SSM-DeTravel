@@ -21,4 +21,8 @@ public interface UserMapper {
     int selectUserToReset(User user);
 
     void updatePasswardByCode(User user);
+
+    User getUserByEmail(String email);
+
+    int updateUserByForm(User user);
 }

@@ -6,11 +6,12 @@ import com.deTravel.utils.MD5Utils;
 import com.deTravel.utils.MailUtils;
 import com.deTravel.utils.UUIDUtils;
 
-
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+
+import static java.lang.String.*;
 
 /**
  * @author WWP
@@ -40,14 +43,15 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation(value = "用户登录操作")
-    public String login(User user, HttpSession session) {
+    public String login(User user,HttpSession session) {
         user.setuPassWord(MD5Utils.getMd5(user.getuPassWord()));
         int count = userService.selectUser(user);
-        if (count > 0) {
-            session.setAttribute("USER", user.getuNickName());
+        if(count>0){
+            session.setAttribute("USER",user.getuNickName());
             return "success";
         }
-        return "fail";
+
+        return  "fail";
     }
 
     /**
@@ -73,6 +77,25 @@ public class UserController {
         return "fail";
     }
 
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value = "图片上传")
+    @ApiImplicitParam(value = "img", name = "图片")
+    public String uploadHeadImg(MultipartFile img) {
+        String originalFilename = img.getOriginalFilename();
+        String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
+        String newFile = UUIDUtils.getUUID() + suffix;
+        String filePrefix = IMG_PATH;
+        try {
+            img.transferTo(new File(filePrefix, newFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String imgUrl = IMG_URL + newFile;
+        return imgUrl;
+    }
+
+
     /**
      * 重设密码
      */
@@ -95,7 +118,46 @@ public class UserController {
 
     }
 
+    /**
+     * 退出登录
+     * @return success
+     */
+    @RequestMapping(value = "/outLogin", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value = "用户退出操作")
+    public String outLogin(HttpSession session) {
+        session.removeAttribute("userAccount");
+        return "success";
 
+    }
 
+    /**
+     * 展示个人信息
+     * @return success
+     */
+    @RequestMapping(value = "/showMyProfile", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value = "展示个人信息")
+    public String showMyProfile(Model model, HttpSession session) {
+        String email = (String) session.getAttribute("userAccount");
+        User user = userService.getUserByEmail(email);
+        model.addAttribute("user", user);
+        return "success";
+    }
+
+    /**
+     * 修改个人信息
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value = "修改用户个人信息")
+    public String updateUser(User user) {
+        user.setuPassWord(MD5Utils.getMd5(user.getuPassWord()));
+        int result = userService.updateUserByForm(user);
+        return "success";
+
+    }
 
 }

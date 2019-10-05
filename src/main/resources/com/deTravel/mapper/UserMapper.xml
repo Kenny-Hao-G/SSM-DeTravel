@@ -23,4 +23,12 @@
         )
     </insert>
 
+    <select id="getUserByEmail" parameterType="string" resultType="user">
+      select * from db_DeTravel.tb_user where uEmail =#{uEmail}
+  </select>
+
+    <update id="updateUserByForm" parameterType="user">
+        update db_DeTravel.tb_user set uName= #{uName},uNickName=#{uNickName}, uPassWord=#{uPassWord},uPhone=#{uPhone}where uId = #{uId}
+    </update>
+
 </mapper>
