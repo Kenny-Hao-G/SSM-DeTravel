@@ -4,27 +4,27 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.deTravel.mapper.FlightMapper">
     <select id="selectFlight" parameterType="FlightInformationVo" resultType="FlightInformation">
-        select id,airline,price,restriction,departureTime,wayToCity from db_DeTravel.tb_flight
-        where 1=1
-        <if test="airline != null and airline != ''">
-            and airline=#{airline}
+        select f.id,a.airlineName,f.price,f.restriction,f.departureTime,f.wayToCity from tb_flight f,tb_airline a
+        where f.airlineId=a.id
+        <if test="airlineId != null and airlineId != ''">
+            and f.airlineId=#{airlineId}
         </if>
         <if test="start != null and start != ''">
-            and start like concat('%'#{start}'%')
+            and f.start like concat('%',#{start},'%')
         </if>
         <if test="destination != null and destination != ''">
-            and destination like concat('%'#{destination}'%')
+            and f.destination like concat('%',#{destination},'%')
         </if>
         <if test="dateOfDeparture != null and dateOfDeparture != ''">
-            and dateOfDeparture=#{dateOfDeparture}
-        </if>
-        <if test="returnDate != null and returnDate != ''">
-            and returnDate=#{returnDate}
+            and f.dateOfDeparture=#{dateOfDeparture}
         </if>
     </select>
     <select id="selectFlightDetailsById" parameterType="int" resultType="FlightInformation">
-        select id,airline,price,restriction,departureTime,wayToCity from db_DeTravel.tb_flight
-        where id=#{id}
+        select f.id,a.airlineName,f.berth,f.berthDate,f.berthBeforeDate,f.berthAfterDate,f.fallTime,f.takeOffFlightNum,f.landingFlightNum,f.start,f.destination from tb_flight f,tb_airline a
+        where f.id=#{id} and f.airlineId=a.id
+    </select>
+    <select id="selectFlightWelfare" parameterType="int" resultType="FlightWelfare">
+        select welfareName from tb_flightWelfare where flightId=#{id}
     </select>
 
 

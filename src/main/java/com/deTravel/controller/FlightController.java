@@ -17,28 +17,40 @@ import java.util.List;
 @Api(value = "航班操作", tags = "航班操作")
 @RequestMapping("/flight")
 @ResponseBody
+@CrossOrigin(origins = "*", allowedHeaders="*")
 public class FlightController {
     @Autowired
     FlightService flightService;
     @ApiOperation("通过条件查询航班信息")
     @RequestMapping(method = RequestMethod.POST,value = "/selectFlightInformation")
-    @CrossOrigin
+    /**
+     * 条件查询航班信息
+     * 通过单选框选择是否有返程信息
+     */
     public String getFlightInformation(FlightInformationVo flightInformationVo, Model model) {
-        if (flightInformationVo.getDateOfDeparture() != null && flightInformationVo.getDateOfDeparture() != "") {
+        if (flightInformationVo.getDateOfDeparture() != null) {
             String[] split = flightInformationVo.getDateOfDeparture().split(",");
             flightInformationVo.setDateOfDeparture(split[0]);
         }
-        System.out.println(flightInformationVo);
         List<FlightInformation> flightInformations = flightService.selectFlight(flightInformationVo);
-        System.out.println(flightInformations);
-        model.addAttribute("flight",flightInformations);
-        return flightInformations.size() > 0 ? "success" : "error";
+        List<FlightInformation> returnFlight = null;
+        if (flightInformationVo.getIds() == null) {
+            String[] returnDate = flightInformationVo.getReturnDate().split(",");
+            flightInformationVo.setDateOfDeparture(returnDate[0]);
+            returnFlight = flightService.selectFlight(flightInformationVo);
+
+        }
+        return flightInformations.size() > 0 || returnFlight != null ? "success" : "error";
     }
-    @RequestMapping("/selectFlightDetailsById")
+    @ApiOperation("查询指定id的航班信息")
+    @RequestMapping(method = RequestMethod.POST,value = "/selectFlightDetailsById")
     @ResponseBody
+    /**
+     * 用户点击航班查看详细信息
+     * 通过航班id查询
+     */
     public String selectFlightDetailsById(int id,Model model) {
         FlightInformation flightInformation = flightService.selectFlightDetailsById(id);
-        model.addAttribute("flight",flightInformation);
-        return "";
+        return flightInformation != null ? "success" : "error";
     }
 }

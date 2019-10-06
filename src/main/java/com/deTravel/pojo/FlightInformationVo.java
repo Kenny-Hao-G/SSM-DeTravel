@@ -8,14 +8,15 @@ public class FlightInformationVo {
     //@ApiModelProperty(name = "出发机场",dataType = "String")
 
     private String start;
-    //@ApiModelProperty(name = "降落机场",dataType = "String")
+    //@ApiModelProperty(name = "降落机场",dataType = "String");
     private String destination;
-    //@ApiModelProperty(name = "航空公司",dataType = "String")
-    private String airline;
-    //@ApiModelProperty(name = "出发日期",dataType = "String")
+    //@ApiModelProperty(name = "航空公司",dataType = "String");
+    private Integer airlineId;
+    //@ApiModelProperty(name = "出发日期",dataType = "String");
     private String dateOfDeparture;
-    //@ApiModelProperty(name = "返程日期",dataType = "String")
+    //@ApiModelProperty(name = "返程日期",dataType = "String");
     private String returnDate;
+    //@ApiModelProperty(name = "是否单程",dataType = "String");
     private String ids;
 
     public String getIds() {
@@ -42,12 +43,12 @@ public class FlightInformationVo {
         this.destination = destination;
     }
 
-    public String getAirline() {
-        return airline;
+    public Integer getAirlineId() {
+        return airlineId;
     }
 
-    public void setAirline(String airline) {
-        this.airline = airline;
+    public void setAirlineId(Integer airlineId) {
+        this.airlineId = airlineId;
     }
 
     public String getDateOfDeparture() {
@@ -72,9 +73,10 @@ public class FlightInformationVo {
         return "FlightInformationVo{" +
                 "start='" + start + '\'' +
                 ", destination='" + destination + '\'' +
-                ", airline='" + airline + '\'' +
+                ", airlineId=" + airlineId +
                 ", dateOfDeparture='" + dateOfDeparture + '\'' +
                 ", returnDate='" + returnDate + '\'' +
+                ", ids='" + ids + '\'' +
                 '}';
     }
 }

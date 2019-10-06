@@ -105,7 +105,7 @@ public class UserController {
     public String reset(User user) {
         int count = userService.selectUserToReset(user);
         if (count > 0) {
-            String code = (int) (Math.random() * (9 + 1) * 100000) + "";
+            String code = (int) ((Math.random() * 9 + 1) * 100000) + "";
 
             MailUtils.sendMail(user.getuEmail(), "你的重置密码是:  " + code + "  收到后请尽快登录修改密码",
                     "欢迎使用DeTravel————APP,祝你愉快！！");

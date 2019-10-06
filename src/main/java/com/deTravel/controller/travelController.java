@@ -1,6 +1,5 @@
 package com.deTravel.controller;
 
-import com.deTravel.pojo.TbArea;
 import com.deTravel.service.TravelService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
