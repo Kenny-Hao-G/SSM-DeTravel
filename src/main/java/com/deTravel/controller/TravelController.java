@@ -18,7 +18,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/travel")
 @Api(value = "旅游", tags = "旅游操作")
-public class travelController {
+public class TravelController {
     @Autowired
     TravelService travelService;
     @Value("${IMG_PATH}")
