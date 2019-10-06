@@ -1,6 +1,7 @@
 package com.deTravel.pojo;
 
 public class TbCountries {
+
     private Integer countriesId;
 
     private String countriesName;

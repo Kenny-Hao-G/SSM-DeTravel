@@ -1,6 +1,7 @@
 package com.deTravel.pojo;
 
 public class TbFlight {
+
     private Integer id;
 
     private String start;

@@ -1,6 +1,7 @@
 package com.deTravel.pojo;
 
 public class TbSiteimage {
+
     private Integer siteimage;
 
     private String siteimageImageaddress;

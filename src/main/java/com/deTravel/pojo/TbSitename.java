@@ -1,6 +1,7 @@
 package com.deTravel.pojo;
 
 public class TbSitename {
+    
     private Integer sitenameId;
 
     private String sitenameName;

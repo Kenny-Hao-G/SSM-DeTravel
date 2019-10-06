@@ -1,6 +1,7 @@
 package com.deTravel.pojo;
 
 public class TbArea {
+
     private Integer areaId;
 
     private String areaName;

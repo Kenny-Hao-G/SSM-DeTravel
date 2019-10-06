@@ -7,4 +7,5 @@
         select * from db_DeTravel.tb_area
     </select>
 
+
 </mapper>

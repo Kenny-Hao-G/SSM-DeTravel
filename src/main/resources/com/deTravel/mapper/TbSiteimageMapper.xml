@@ -6,6 +6,7 @@
     <result column="siteImage_imageAddress" property="siteimageImageaddress" jdbcType="VARCHAR" />
     <result column="siteName_keys" property="sitenameKeys" jdbcType="VARCHAR" />
   </resultMap>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
