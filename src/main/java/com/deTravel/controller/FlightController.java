@@ -53,4 +53,5 @@ public class FlightController {
         FlightInformation flightInformation = flightService.selectFlightDetailsById(id);
         return flightInformation != null ? "success" : "error";
     }
+
 }

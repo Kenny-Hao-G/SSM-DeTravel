@@ -1,6 +1,7 @@
 package com.deTravel.service.impl;
 
 import com.deTravel.mapper.TravelMapper;
+import com.deTravel.pojo.TbArea;
 import com.deTravel.service.TravelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,5 +1,6 @@
 package com.deTravel.controller;
 
+import com.deTravel.pojo.TbArea;
 import com.deTravel.service.TravelService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,7 +32,7 @@ public class travelController {
     @RequestMapping(value = "/dengshan", method = RequestMethod.POST)
     @ResponseBody
     @ApiOperation(value = "进入登山页面")
-    public String dengshan(TbArea tbArea,Model model) {
+    public String dengshan(TbArea tbArea, Model model) {
         List<TbArea> listArea = travelService.selectAllArea(tbArea);
         model.addAttribute("listArea", listArea);
         return "success";
